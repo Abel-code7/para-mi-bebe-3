@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Karen ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+height:100vh;
+overflow:hidden;
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+background:radial-gradient(circle at top,#2b0033,#0d001a);
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+}
+
+/* Carta */
+.carta{
+width:92%;
+max-width:380px;
+padding:22px;
+border-radius:22px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+box-shadow:0 0 25px rgba(255,0,150,0.4);
+z-index:2;
+}
+
+.nombre{
+font-size:18px;
+font-weight:bold;
+background:linear-gradient(90deg,#ff4da6,#fff,#ff4da6);
+background-size:300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:brillo 5s linear infinite;
+}
+
+@keyframes brillo{
+0%{background-position:0%;}
+100%{background-position:300%;}
+}
+
+p{
+font-size:14px;
+margin-top:10px;
+line-height:1.5;
+}
+
+.contador{
+margin-top:12px;
+font-size:13px;
+color:#ffb3ec;
+}
+
+.boton{
+margin-top:15px;
+padding:9px 14px;
+border:none;
+border-radius:18px;
+background:#ff4da6;
+color:white;
+font-size:13px;
+cursor:pointer;
+}
+
+/* Anillo */
+.anillo{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+font-size:80px;
+opacity:0;
+transition:all .6s ease;
+z-index:5;
+}
+.anillo.mostrar{
+transform:translate(-50%,-50%) scale(1.2);
+opacity:1;
+animation:brillar 1.2s infinite alternate;
+}
+@keyframes brillar{
+from{filter:drop-shadow(0 0 10px gold);}
+to{filter:drop-shadow(0 0 25px yellow);}
+}
+
+/* Propuesta */
+.propuesta{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,.85);
+padding:18px;
+border-radius:20px;
+display:none;
+width:90%;
+max-width:340px;
+z-index:6;
+}
+.propuesta h3{
+font-size:15px;
+margin-bottom:10px;
+}
+.propuesta button{
+margin:5px;
+padding:7px 12px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+font-size:12px;
+}
+
+/* Corazones */
+.corazon{
+position:fixed;
+top:-10px;
+color:#ff4da6;
+animation:caer linear forwards;
+}
+@keyframes caer{
+to{transform:translateY(110vh);opacity:0;}
+}
+
+iframe{display:none;}
+</style>
+</head>
+
+<body>
+
+<div class="anillo" id="anillo">💍</div>
+
+<div class="carta">
+<div class="nombre">Karen Nicol Morales Barrera 💖</div>
+<p>
+Desde el 07/01/2026 comenzó nuestra historia más hermosa.
+Eres mi amor eterno y mi felicidad infinita y mi todo bb<3
+baby aprovecho q estas durmiendo para poder hacerte esto xq 
+como me dijiste q te gustan q te haga esto no me
+cansare de hacerlo xq te gusta asi yo duerma tarde no importa bb
+bueno amorcito como siempre te digo cuando hablo para ti 
+las palabras son infinitas xq eres mi mayor tesoro q tengo
+alegras todos mis dias con tu presencia, tu voz, tu risita y
+la forma en la q me amas bb, gracias x estar a mi lado mi niña
+no me canso de decirte q eres lo mejor q me a pasado mi amor
+te amo demasiado mi niña ya quiero q termine el año para q tu
+papá me de el permiso de ir a verte pero menos mal este año esta avanzando rapido
+xq ya estamos marzo y solo faltan 9 meses más para q accabe el
+año y espero siga avanzando rapido pa ir a verte bebeeeeeee
+mi niña desde q te conoci estoy muy feliz la verdad 
+nunca eh estado tan feliz pero llegaste tu a cambiar todo, 
+hacerme sentir muy amado y enamorarme cada dia más, más, más...
+y nuevamente te agradezco x hacerme muy feliz mi vida
+</p>
+
+<div class="contador" id="contador"></div>
+
+<button class="boton" onclick="activarPropuesta()">
+Siempre tú y yo
+</button>
+</div>
+
+<div class="propuesta" id="propuesta">
+<h3>¿Quieres estar conmigo para siempre? 💕</h3>
+<button onclick="respuestaSi()">Sí 💖</button>
+<button onclick="respuestaObvio()">Obvio sí 😍</button>
+</div>
+
+<!-- Música (se activa al primer toque para evitar bloqueo móvil) -->
+<iframe id="musica"
+src="https://www.youtube.com/embed/TlrNxJqODBc?enablejsapi=1&loop=1&playlist=TlrNxJqODBc"
+allow="autoplay"></iframe>
+
+<script>
+
+// Activar música al primer toque
+let musicaIniciada=false;
+document.addEventListener("click",function(){
+if(!musicaIniciada){
+document.getElementById("musica").src += "&autoplay=1";
+musicaIniciada=true;
+}
+});
+
+// Contador desde 07/01/2026
+const fechaInicio=new Date("2026-01-07T00:00:00");
+setInterval(()=>{
+const ahora=new Date();
+const diff=ahora-fechaInicio;
+
+const dias=Math.floor(diff/(1000*60*60*24));
+const horas=Math.floor((diff/(1000*60*60))%24);
+const minutos=Math.floor((diff/(1000*60))%60);
+const segundos=Math.floor((diff/1000)%60);
+
+document.getElementById("contador").innerHTML=
+`Juntos por: ${dias} días, ${horas}h ${minutos}m ${segundos}s 💞`;
+},1000);
+
+// Lluvia ligera de corazones optimizada
+setInterval(()=>{
+const c=document.createElement("div");
+c.className="corazon";
+c.innerHTML="❤";
+c.style.left=Math.random()*100+"vw";
+c.style.fontSize=(Math.random()*18+12)+"px";
+c.style.animationDuration=(Math.random()*3+4)+"s";
+document.body.appendChild(c);
+setTimeout(()=>{c.remove();},6000);
+},600);
+
+// Propuesta
+function activarPropuesta(){
+document.getElementById("anillo").classList.add("mostrar");
+document.getElementById("propuesta").style.display="block";
+fuegos();
+}
+
+function fuegos(){
+for(let i=0;i<15;i++){
+let f=document.createElement("div");
+f.innerHTML="🎆";
+f.style.position="fixed";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+f.style.fontSize="24px";
+document.body.appendChild(f);
+setTimeout(()=>{f.remove();},1500);
+}
+}
+
+function respuestaSi(){
+alert("Sabía que dirías que sí 💖✨");
+}
+
+function respuestaObvio(){
+alert("Entonces es para siempre mi amor 💍💕");
+}
+
+</script>
+
+</body>
+</html>
